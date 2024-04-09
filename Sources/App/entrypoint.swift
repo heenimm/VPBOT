@@ -4,6 +4,8 @@ import Logging
 @main
 enum Entrypoint {
     static func main() async throws {
+        let TGBOT: TGBotConnection = .init()
+        
         var env = try Environment.detect()
         try LoggingSystem.bootstrap(from: &env)
         

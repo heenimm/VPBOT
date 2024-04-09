@@ -10,5 +10,7 @@ func routes(_ app: Application) throws {
         "Hello, world!"
     }
 
+    try app.register(collection: TelegramController())
+    
     try app.register(collection: TodoController())
 }
