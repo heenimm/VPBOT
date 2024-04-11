@@ -41,7 +41,7 @@ final class DefaultBotHandlers {
 
                    // Создание кнопок
                    let buttons: [[TGInlineKeyboardButton]] = [
-                       [.init(text: "🌏 Узнать больше о роадмапе на сайте", callbackData: "/web_site")],
+                       [.init(text: "🌏 Узнать больше о роадмапе на сайте", callbackData: "web_site")],
                        [.init(text: "👨🏻‍💻 Получить вступительное тестовое задание", callbackData: "/send_file_with_button")]
                    ]
 
@@ -51,7 +51,7 @@ final class DefaultBotHandlers {
                    // Параметры сообщения с изображением и кнопками
                    let params = TGSendPhotoParams(
                        chatId: .chat(userId),
-                       photo: .url("https://disk.yandex.ru/i/q8WgWkEpRlF7xQ"),
+                       photo: .url("https://i.ytimg.com/vi/zyff11cIuaA/maxresdefault.jpg"),
                        caption: welcomeMessage,
                        replyMarkup: .inlineKeyboardMarkup(keyboard)
                    )
@@ -97,6 +97,20 @@ final class DefaultBotHandlers {
 
     /// Handler for buttons callbacks
     private static func buttonsActionHandler(app: Vapor.Application, connection: TGConnectionPrtcl) async {
+        await connection.dispatcher.add(TGCallbackQueryHandler(pattern: "web_site") {
+            update, bot in
+            guard let callbackQuery = update.callbackQuery else { return }
+            
+            let chatId: Int64 = callbackQuery.message?.chat.id ?? 0
+            let link = "https://sites.google.com/view/roadmap-ios/главная-страница"
+
+            let driveButton = TGInlineKeyboardButton(text: "Перейти на сайт", url: link)
+            // Параметры сообщения с кнопками
+
+        })
+        
+        
+        
         await connection.dispatcher.add(TGCallbackQueryHandler(pattern: "/send_file_with_button") { update, bot in
                     guard let callbackQuery = update.callbackQuery else { return }
                     

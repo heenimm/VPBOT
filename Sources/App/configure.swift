@@ -11,7 +11,7 @@ public func configure(_ app: Application) async throws {
     // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     let TGBOT: TGBotConnection = .init()
     
-    let tgApi: String = "7100785658:AAFlrLcjJybKIkmWDaBZngla9rXaGxS1mno"
+    let tgApi: String = Token.token
     TGBot.log.logLevel = app.logger.logLevel
     let bot: TGBot = .init(app: app, botId: tgApi)
     await TGBOT.setConnection(try await TGLongPollingConnection(bot: bot))
